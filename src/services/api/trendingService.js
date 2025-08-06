@@ -10,5 +10,7 @@ export async function getTrendingSearchList() {
 
   if (!response.ok) throw new Error("Failed to fetch trending search list");
 
-  return response.json();
+  const { coins } = await response.json();
+
+  return coins.map((coin) => coin.item);
 }

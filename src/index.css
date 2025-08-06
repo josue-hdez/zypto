@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@plugin 'tailwind-scrollbar';
+
 @font-face {
   font-family: Rubik;
   font-style: normal;
@@ -11,4 +13,23 @@
 @theme {
   /* Font */
   --font-rubik: "Rubik", sans-serif;
+
+  /* Colors */
+  --color-charcoal: #36454f;
+  --color-blue: #0052ff;
+  --color-light-gray: #eef0f3;
+  --color-light-gray-disabled: #eef0f359;
+  --color-positive: #098551;
+  --color-negative: #cf202f;
+
+  /* Breakpoints */
+  --breakpoint-xs: 425px;
+}
+
+.content-block {
+  @apply font-rubik text-charcoal py-3 border-b border-light-gray;
+}
+
+.container {
+  @apply w-[90%] max-w-[1440px] mx-auto;
 }

@@ -1,10 +1,10 @@
+const BASE_URL = "https://api.coingecko.com/api/v3/coins";
 const init = {
   method: "GET",
   headers: {
     "x-cg-demo-api-key": import.meta.env.VITE_API_KEY,
   },
 };
-const BASE_URL = "https://api.coingecko.com/api/v3/coins";
 
 export async function getCoinsListWithMarketData(
   itemsPerPage = 10,

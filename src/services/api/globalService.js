@@ -11,5 +11,7 @@ export async function getCryptoGlobalMarketData() {
   if (!response.ok)
     throw new Error("Failed to fetch crypto global market data");
 
-  return response.json();
+  const { data } = await response.json();
+
+  return data;
 }
