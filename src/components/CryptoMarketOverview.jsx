@@ -8,8 +8,6 @@ function CryptoMarketOverview() {
   const [cryptoGlobalMarketData, setCryptoGlobalMarketData] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleClick = () => setIsOpen((isOpen) => !isOpen);
-
   useEffect(() => {
     async function fetchData() {
       try {
@@ -27,7 +25,7 @@ function CryptoMarketOverview() {
   return (
     <section className="content-block">
       <div className="container space-y-3">
-        <h2 className="font-medium text-3xl">Crypto Prices by Market Cap</h2>
+        <h2 className="font-medium text-3xl">Coins Prices by Market Cap</h2>
         {cryptoGlobalMarketData ? (
           <p>
             {`The global crypto market cap today is
@@ -44,7 +42,7 @@ function CryptoMarketOverview() {
             {" change in the last 24 hours."}
           </p>
         ) : (
-          <Loader size="w-3/5 h-3" />
+          <Loader width="w-3/5" height="h-3" />
         )}
 
         {isOpen &&
@@ -58,12 +56,15 @@ function CryptoMarketOverview() {
                 2
               )}%. ZYPTO is now tracking ${cryptoGlobalMarketData.active_cryptocurrencies.toLocaleString(
                 "en-US"
-              )} cryptos.`}
+              )} coins.`}
             </p>
           ) : (
-            <Loader size="w-full h-3" />
+            <Loader width="w-full" height="h-3" />
           ))}
-        <span className="font-medium cursor-pointer" onClick={handleClick}>
+        <span
+          className="font-medium cursor-pointer"
+          onClick={() => setIsOpen((isOpen) => !isOpen)}
+        >
           Read {isOpen ? "less" : "more"}
         </span>
       </div>

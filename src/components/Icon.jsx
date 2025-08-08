@@ -1,11 +1,11 @@
 const colors = {
-  ["charcoal"]: "#36454f",
-  ["blue"]: "#0052ff",
+  charcoal: "#36454f",
+  positive: "#098551",
+  negative: "#cf202f",
+  transparent: "transparent",
+  blue: "#0052ff",
   ["light-gray"]: "#eef0f3",
   ["light-gray-disabled"]: "#eef0f359",
-  ["positive"]: "#098551",
-  ["negative"]: "#cf202f",
-  ["transparent"]: "transparent",
 };
 
 function Icon({ size = "24px", color = "charcoal", children }) {

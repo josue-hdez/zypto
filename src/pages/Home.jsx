@@ -1,13 +1,13 @@
 import CryptoMarketOverview from "../components/CryptoMarketOverview";
-import CryptoTable from "../components/CryptoTable";
-import TrendingSearchCryptos from "../components/TrendingSearchCryptos";
+import CoinsTable from "../components/CoinsTable";
+import TrendingCoins from "../components/TrendingCoins";
 
 function Home() {
   return (
     <main>
       <CryptoMarketOverview />
-      <CryptoTable />
-      <TrendingSearchCryptos />
+      <CoinsTable />
+      <TrendingCoins />
     </main>
   );
 }

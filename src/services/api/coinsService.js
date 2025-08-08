@@ -38,7 +38,9 @@ export async function getCoinHistoricalChartDataById(id, days = 1) {
   if (!response.ok)
     throw new Error("Failed to fetch coin historical chart data by id");
 
-  return response.json();
+  const { prices } = await response.json();
+
+  return prices;
 }
 
 export async function getCoinOHLCChartDataById(id, days = 1) {

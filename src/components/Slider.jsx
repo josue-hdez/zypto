@@ -1,11 +1,9 @@
 import "swiper/css";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper } from "swiper/react";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
-import TrendingSearchCryptoCard from "./TrendingSearchCryptoCard";
-import TrendingSearchCryptoCardLoader from "./TrendingSearchCryptoCardLoader";
 
-function Slider({ trendingSearchList, prevRef, nextRef }) {
+function Slider({ prevRef, nextRef, children }) {
   return (
     <Swiper
       spaceBetween={12}
@@ -35,17 +33,7 @@ function Slider({ trendingSearchList, prevRef, nextRef }) {
         swiper.params.navigation.nextEl = nextRef.current;
       }}
     >
-      {trendingSearchList.length
-        ? trendingSearchList.map((trendingCryto) => (
-            <SwiperSlide>
-              <TrendingSearchCryptoCard trendingCryto={trendingCryto} />
-            </SwiperSlide>
-          ))
-        : [1, 2, 3, 4, 5].map((id) => (
-            <SwiperSlide key={id}>
-              <TrendingSearchCryptoCardLoader />
-            </SwiperSlide>
-          ))}
+      {children}
     </Swiper>
   );
 }

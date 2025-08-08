@@ -1,14 +1,18 @@
 /**
  * Formats a number into a human-readable US Dollar currency string.
  *
- * - Large numbers are shortened with appropriate units:
- *   - Trillions (T), Billions (B), Millions (M)
- * - Numbers between 0 and 1 are formatted with up to 4 decimal places,
- *   or more if needed to avoid rounding to zero.
- * - Invalid or non-numeric values return a dash ("-").
+ * Features:
+ * - Abbreviates large numbers using standard suffixes:
+ *   - "T" for trillions (≥ 1e12)
+ *   - "B" for billions (≥ 1e9)
+ *   - "M" for millions (≥ 1e6)
+ *   - Optionally "K" for thousands (≥ 1e3) if `includeThousands` is true
+ * - Handles small numbers between 0 and 1 with high precision
+ * - Returns a dash ("-") for invalid or non-numeric inputs
  *
- * @param {number} num - The number to format.
- * @returns {string} - The formatted currency string or "-" if invalid input.
+ * @param {number} num - The numeric value to be formatted.
+ * @param {boolean} [includeThousands=false] - Whether to include "K" for thousands.
+ * @returns {string} - A formatted USD currency string, or "-" for invalid inputs.
  *
  * @example
  * formatNumberToCurrency(1234567890); // "$1,234.57M"
@@ -16,7 +20,7 @@
  * formatNumberToCurrency(100); // "$100.00"
  * formatNumberToCurrency("abc"); // "-"
  **/
-export function formatNumberToCurrency(num) {
+export function formatNumberToCurrency(num, includeThousands = false) {
   if (typeof num !== "number" || isNaN(num)) return "-";
 
   const units = [
@@ -24,6 +28,10 @@ export function formatNumberToCurrency(num) {
     { value: 1e9, symbol: "B" },
     { value: 1e6, symbol: "M" },
   ];
+
+  if (includeThousands) {
+    units.push({ value: 1e3, symbol: "K" });
+  }
 
   const currencyOptions = (options) => ({
     style: "currency",

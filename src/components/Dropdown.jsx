@@ -1,5 +1,8 @@
 import Select from "react-select";
 
+const lightGray = "#eef0f3";
+const lightGrayDisabled = "#eef0f359";
+
 function Dropdown({ options, selectedOption, onChange }) {
   return (
     <div className="w-[150px] hidden md:block absolute top-1/2 right-0 -translate-y-1/2">
@@ -10,19 +13,19 @@ function Dropdown({ options, selectedOption, onChange }) {
             fontSize: "14px",
             padding: "3px 9px",
             border: "none",
-            borderRadius: "24px",
             boxShadow: "none",
-            backgroundColor: "#eef0f3",
+            borderRadius: "24px",
+            backgroundColor: lightGray,
             cursor: "pointer",
           }),
           option: (base, state) => {
             return {
               ...base,
-              ":active": { backgroundColor: "#eef0f359" },
+              ":active": { backgroundColor: lightGrayDisabled },
               fontSize: "14px",
               margin: "3px 0px",
               borderRadius: "24px",
-              backgroundColor: state.isDisabled ? "#eef0f359" : "#eef0f3",
+              backgroundColor: state.isDisabled ? lightGrayDisabled : lightGray,
               cursor: state.isDisabled ? "not-allowed" : "pointer",
             };
           },
@@ -30,10 +33,12 @@ function Dropdown({ options, selectedOption, onChange }) {
             return {
               ...base,
               padding: "3px 9px",
-              borderRadius: "24px",
               boxShadow: "none",
-              backgroundColor: "#eef0f3",
+              borderRadius: "24px",
+              backgroundColor: lightGray,
               overflow: "hidden",
+              top: "none",
+              bottom: "100%",
             };
           },
         }}

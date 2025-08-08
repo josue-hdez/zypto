@@ -16,11 +16,11 @@
 
   /* Colors */
   --color-charcoal: #36454f;
+  --color-positive: #098551;
+  --color-negative: #cf202f;
   --color-blue: #0052ff;
   --color-light-gray: #eef0f3;
   --color-light-gray-disabled: #eef0f359;
-  --color-positive: #098551;
-  --color-negative: #cf202f;
 
   /* Breakpoints */
   --breakpoint-xs: 425px;

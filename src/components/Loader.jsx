@@ -1,6 +1,8 @@
-function Loader({ size }) {
+function Loader({ className = "", width, height }) {
   return (
-    <div className={`${size} rounded-full bg-gray-300 animate-pulse`}></div>
+    <div
+      className={`${className} ${width} ${height} rounded-full bg-gray-300 animate-pulse`}
+    ></div>
   );
 }
 

@@ -5,7 +5,7 @@ function PercentageChangeIndicator({ change }) {
     change === 0 ? "charcoal" : change > 0 ? "positive" : "negative";
 
   return (
-    <span className="space-x-1">
+    <span className="text-nowrap space-x-1">
       {change === 0 ? null : (
         <Icon color={color}>
           {change > 0 ? (
