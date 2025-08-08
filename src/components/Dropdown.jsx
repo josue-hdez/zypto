@@ -1,7 +1,8 @@
 import Select from "react-select";
+import { getColor } from "../utils/getColor";
 
-const lightGray = "#eef0f3";
-const lightGrayDisabled = "#eef0f359";
+const lightGray = getColor("light-gray");
+const lightGrayDisabled = getColor("light-gray-disabled");
 
 function Dropdown({ options, selectedOption, onChange }) {
   return (

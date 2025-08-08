@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { Outlet } from "react-router";
+import { Link, Outlet } from "react-router";
 import Icon from "../components/Icon";
 
 function AppLayout() {
@@ -9,7 +9,9 @@ function AppLayout() {
     <>
       <header className="content-block">
         <div className="container space-y-1 xs:space-y-0 xs:flex xs:justify-between xs:items-center">
-          <h1 className="font-medium text-3xl">ZYPTO</h1>
+          <Link to="/">
+            <h1 className="font-medium text-3xl">ZYPTO</h1>
+          </Link>
           <div
             className="w-full xs:w-3/5 max-w-[450px] h-[45px] px-6 rounded-full bg-light-gray flex items-center cursor-text"
             onClick={() => inputRef.current.focus()}

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { graphic } from "echarts";
 import ReactECharts from "echarts-for-react";
-import { getCoinHistoricalChartDataById } from "../services/api/coinsService";
+import { getCoinOHLCChartDataById } from "../services/api/coinsService";
 import { formatNumberToCurrency } from "../utils/formatNumberToCurrency";
 import { formatDate } from "../utils/formatDate";
 import { getColor } from "../utils/getColor";
@@ -14,27 +13,27 @@ const positive = getColor("positive");
 const negative = getColor("negative");
 const white = getColor("white");
 
-function LineChart({ change, coinId, day }) {
-  const [coinHistoricalChartData, setCoinHistoricalChartData] = useState(null);
-
-  const color = change === 0 ? charcoal : change > 0 ? positive : negative;
-  const gradientColor = graphic.LinearGradient(0, 0, 0, 1, [
-    {
-      offset: 0,
-      color,
-    },
-    {
-      offset: 1,
-      color: white,
-    },
-  ]);
+function CandlestickChart({ coinId, day }) {
+  const [coinOHLCChartData, setCoinOHLCChartData] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const data = await getCoinHistoricalChartDataById(coinId, day);
+        const data = await getCoinOHLCChartDataById(coinId, day);
 
-        setCoinHistoricalChartData(data);
+        setCoinOHLCChartData(
+          data.reduce(
+            (obj, el) => {
+              const [timestamp, open, high, low, close] = el;
+
+              obj.timestamp.push(formatDate(new Date(timestamp), true));
+              obj.ohlc.push([open, close, low, high]);
+
+              return obj;
+            },
+            { timestamp: [], ohlc: [] }
+          )
+        );
       } catch (error) {
         console.log(error.message);
       }
@@ -44,13 +43,14 @@ function LineChart({ change, coinId, day }) {
   }, [coinId, day]);
 
   return (
-    coinHistoricalChartData && (
+    coinOHLCChartData && (
       <div className="w-full h-[450px]">
         <ReactECharts
           style={{ width: "100%", height: "100%" }}
           option={{
             xAxis: {
-              type: "time",
+              type: "category",
+              data: coinOHLCChartData.timestamp,
               boundaryGap: false,
               axisLabel: {
                 color: charcoal,
@@ -59,7 +59,6 @@ function LineChart({ change, coinId, day }) {
             },
             yAxis: {
               position: "right",
-              type: "value",
               boundaryGap: false,
               scale: true,
               axisLabel: {
@@ -68,6 +67,9 @@ function LineChart({ change, coinId, day }) {
                 },
                 color: charcoal,
                 fontFamily,
+              },
+              splitArea: {
+                show: true,
               },
             },
             dataZoom: [
@@ -81,22 +83,11 @@ function LineChart({ change, coinId, day }) {
                     color: lightGray,
                   },
                 },
-                selectedDataBackground: {
-                  lineStyle: {
-                    color,
-                  },
-                  areaStyle: {
-                    color: gradientColor,
-                  },
-                },
                 fillerColor: lightGrayDisabled,
                 borderColor: white,
                 handleStyle: {
                   color: lightGray,
                   borderColor: lightGray,
-                },
-                labelFormatter: function (value) {
-                  return formatDate(new Date(value), true);
                 },
                 textStyle: {
                   color: charcoal,
@@ -110,15 +101,29 @@ function LineChart({ change, coinId, day }) {
             tooltip: {
               trigger: "axis",
               axisPointer: {
-                lineStyle: {
+                type: "cross",
+                label: {
+                  formatter: (params) => {
+                    return params.axisDimension === "y"
+                      ? formatNumberToCurrency(params.value)
+                      : params.value;
+                  },
+                },
+                crossStyle: {
                   color: charcoal,
                 },
               },
               formatter: (params) => {
-                return `${formatDate(
-                  new Date(params[0].data[0]),
-                  true
-                )} | <b>${formatNumberToCurrency(params[0].data[1])}</b>`;
+                const {
+                  axisValueLabel,
+                  data: [_, open, close, high, low],
+                } = params[0];
+
+                return `${axisValueLabel}<br /><br />
+                Open: <b>${formatNumberToCurrency(open)}</b><br />
+                High: <b>${formatNumberToCurrency(high)}</b><br />
+                Low: <b>${formatNumberToCurrency(low)}</b><br />
+                Close: <b>${formatNumberToCurrency(close)}</b>`;
               },
               textStyle: {
                 color: charcoal,
@@ -127,16 +132,15 @@ function LineChart({ change, coinId, day }) {
             },
             series: [
               {
-                type: "line",
-                name: "Coin Price",
-                symbol: "none",
-                lineStyle: {
-                  color,
+                type: "candlestick",
+                name: "OHLC",
+                itemStyle: {
+                  color: positive,
+                  color0: negative,
+                  borderColor: positive,
+                  borderColor0: negative,
                 },
-                areaStyle: {
-                  color: gradientColor,
-                },
-                data: coinHistoricalChartData,
+                data: coinOHLCChartData.ohlc,
               },
             ],
           }}
@@ -146,4 +150,4 @@ function LineChart({ change, coinId, day }) {
   );
 }
 
-export default LineChart;
+export default CandlestickChart;

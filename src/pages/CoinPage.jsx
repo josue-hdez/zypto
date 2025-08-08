@@ -14,7 +14,7 @@ const timeFrameOptions = [
 
 function CoinPage() {
   const [coinData, setCoinData] = useState(null);
-  // const [chartType, setChartType] = useState("area"); // area | candlestick
+
   const [selectedTimeFrameOption, setSelectedTimeFrameOption] = useState(
     timeFrameOptions[0]
   );

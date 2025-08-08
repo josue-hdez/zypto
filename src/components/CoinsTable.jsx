@@ -1,6 +1,6 @@
 import { useEffect, useReducer } from "react";
 import { useNavigate } from "react-router";
-import { getCryptoGlobalMarketData } from "../services/api/globalService";
+// import { getCryptoGlobalMarketData } from "../services/api/globalService";
 import { getCoinsListWithMarketData } from "../services/api/coinsService";
 import { formatNumberToCurrency } from "../utils/formatNumberToCurrency";
 import PercentageChangeIndicator from "./PercentageChangeIndicator";
@@ -120,8 +120,10 @@ function CoinsTable() {
           currentPage
         );
 
-        const { active_cryptocurrencies: totalCoins } =
-          await getCryptoGlobalMarketData();
+        // const { active_cryptocurrencies: totalCoins } =
+        //   await getCryptoGlobalMarketData();
+
+        const totalCoins = 10000;
 
         dispatch({
           type: "coinsListWithMarketData/loaded",

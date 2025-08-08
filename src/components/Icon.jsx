@@ -1,12 +1,4 @@
-const colors = {
-  charcoal: "#36454f",
-  positive: "#098551",
-  negative: "#cf202f",
-  transparent: "transparent",
-  blue: "#0052ff",
-  ["light-gray"]: "#eef0f3",
-  ["light-gray-disabled"]: "#eef0f359",
-};
+import { getColor } from "../utils/getColor";
 
 function Icon({ size = "24px", color = "charcoal", children }) {
   return (
@@ -16,7 +8,7 @@ function Icon({ size = "24px", color = "charcoal", children }) {
       viewBox="0 -960 960 960"
       width={size}
       height={size}
-      fill={colors[color]}
+      fill={getColor(color)}
     >
       {children}
     </svg>
