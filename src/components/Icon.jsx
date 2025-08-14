@@ -1,7 +1,7 @@
 import { getHexColor } from "../utils/getHexColor";
 
 const ICON_SIZES = {
-  xs: "18px",
+  xs: "16px",
   sm: "20px",
   md: "24px",
   lg: "28px",

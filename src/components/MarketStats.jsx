@@ -66,11 +66,11 @@ function MarketStats() {
             loop: true,
             slidesPerView: 1,
             breakpoints: {
-              768: {
+              640: {
                 slidesPerView: 3,
               },
 
-              1024: {
+              1280: {
                 loop: false,
                 slidesPerView: 6,
               },
@@ -79,13 +79,17 @@ function MarketStats() {
         >
           {stats.map(({ value, change, style, label }) => (
             <SwiperSlide key={label}>
-              <div className="flex md:justify-center gap-1">
-                <h3>{label}</h3>
-                <span className="font-medium">
+              <div className="flex sm:justify-center gap-1">
+                <h3 className="text-xs">{label}</h3>
+                <span className="font-medium text-xs">
                   {formatNumber(value, style)}
                 </span>
                 {change && (
-                  <ChangePercentageIndicator change={change} iconSize="xs" />
+                  <ChangePercentageIndicator
+                    change={change}
+                    iconSize="xs"
+                    fontSize="text-xs"
+                  />
                 )}
               </div>
             </SwiperSlide>

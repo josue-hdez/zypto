@@ -3,7 +3,7 @@ import Icon from "./Icon";
 
 function ChangePercentageIndicator({ change, iconSize, fontSize }) {
   return (
-    <span className="space-x-1">
+    <span className="inline-flex gap-1">
       {change && (
         <Icon size={iconSize} color={change > 0 ? "positive" : "negative"}>
           {change > 0 ? (
