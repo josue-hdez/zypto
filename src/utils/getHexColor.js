@@ -6,7 +6,7 @@ const COLORS = {
   negative: "#e7000b",
   white: "#ffffff",
   black: "#000000",
-  transparent: "trasnparent",
+  transparent: "transparent",
 };
 
 export function getHexColor(color) {
