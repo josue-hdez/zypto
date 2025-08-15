@@ -74,7 +74,7 @@ function TrendingCoins() {
         >
           {trendingSearchList.map(({ id, thumb, symbol, data }) => (
             <SwiperSlide key={id}>
-              <TrendingCard thumb={thumb} symbol={symbol} data={data} />
+              <TrendingCard id={id} thumb={thumb} symbol={symbol} data={data} />
             </SwiperSlide>
           ))}
         </Slider>

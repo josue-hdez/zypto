@@ -1,4 +1,5 @@
 import { useEffect, useReducer } from "react";
+import { useNavigate } from "react-router";
 import { getCoinsListWithMarketData } from "../../../services/api/coinsAPI";
 import { formatNumber } from "../../../utils/formatNumber";
 import ChangePercentageIndicator from "../../../components/ChangePercentageIndicator";
@@ -89,6 +90,8 @@ function CoinsTable() {
 
   const totalPages = Math.ceil(TOTAL_COINS / itemsPerPage);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     (async () => {
       try {
@@ -146,6 +149,7 @@ function CoinsTable() {
                 <tr
                   key={coin.id}
                   className="hover:bg-light-steel cursor-pointer"
+                  onClick={() => navigate("/" + coin.id)}
                 >
                   <td className="w-66 xl:w-96 py-1.5 pl-3 pr-1 flex items-center gap-1">
                     <img

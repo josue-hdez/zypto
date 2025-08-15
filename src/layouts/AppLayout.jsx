@@ -1,4 +1,4 @@
-import { Outlet } from "react-router";
+import { Link, Outlet } from "react-router";
 import MarketStats from "../components/MarketStats";
 
 function AppLayout() {
@@ -10,7 +10,9 @@ function AppLayout() {
         <MarketStats />
         <div className="border-bottom">
           <div className="container">
-            <h1 className="text-xl lg:text-3xl">Zypto</h1>
+            <h1 className="text-xl lg:text-3xl">
+              <Link to="/">Zypto</Link>
+            </h1>
           </div>
         </div>
       </header>
