@@ -1,12 +1,14 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router";
 import { SwiperSlide } from "swiper/react";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import { getTrendingSearchList } from "../../../services/api/trendingAPI";
+import { formatNumber } from "../../../utils/formatNumber";
 import Button from "../../../components/Button";
 import Icon from "../../../components/Icon";
 import Slider from "../../../components/Slider";
-import TrendingCard from "./TrendingCard";
+import ChangePercentageIndicator from "../../../components/ChangePercentageIndicator";
 
 function TrendingCoins() {
   const [trendingSearchList, setTrendingSearchList] = useState([]);
@@ -74,7 +76,22 @@ function TrendingCoins() {
         >
           {trendingSearchList.map(({ id, thumb, symbol, data }) => (
             <SwiperSlide key={id}>
-              <TrendingCard id={id} thumb={thumb} symbol={symbol} data={data} />
+              <Link
+                to={"/" + id}
+                className="p-3 rounded-lg bg-light-steel flex flex-col gap-1 cursor-pointer"
+              >
+                <img
+                  className="size-9 rounded-full"
+                  src={thumb}
+                  alt={`${symbol} logo`}
+                />
+                <h3 className="font-medium">{symbol}</h3>
+                <ChangePercentageIndicator
+                  change={data.price_change_percentage_24h.usd}
+                  fontSize="text-lg"
+                />
+                <span>{formatNumber(data.price, "currency")}</span>
+              </Link>
             </SwiperSlide>
           ))}
         </Slider>
